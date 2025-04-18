@@ -6,9 +6,9 @@ kappa = 0.13;
 rho = 0.8;
 
 % Coefficients from numerical solution (approximated)
-a = 0.701502; % 1.43991; 
-b = 0.262662; % -1.70648; 
-c = 0.885;
+a = 0; %0.701502; % 1.43991; 
+b = 0.615; %0.262662; % -1.70648; 
+c = 0.492; %0.885;
 d = 0.115;  % Not used here since eta_t = 0
 
 % Simulation settings

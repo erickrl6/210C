@@ -1,10 +1,10 @@
 clear all
 
 % Parameters from previous solutions
-a = 0.701502; % 1.43991; 
-b = 0.262662; % -1.70648; 
-c = 0.885;
-d = 0.115;
+a = 0; %0.701502; % 1.43991; 
+b = 0.615; %0.262662; % -1.70648; 
+c = 0.492; %0.885;
+d = 0.115;  % Not used here since eta_t = 0
 rho = 0.8;
 T = 600; % I will burn the first 100
 N_sim = 500;
