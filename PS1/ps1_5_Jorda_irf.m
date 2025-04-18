@@ -2,8 +2,8 @@ clear all
 
 % Parameters from previous solutions
 a = 0; %0.701502; % 1.43991; 
-b = 0.615; %0.262662; % -1.70648; 
-c = 0.492; %0.885;
+b = 0.49232; %0.262662; % -1.70648; 
+c = 0.6154; %0.885;
 d = 0.115;  % Not used here since eta_t = 0
 rho = 0.8;
 T = 600; % I will burn the first 100
@@ -19,6 +19,9 @@ IRF_LP = zeros(H+1, N_sim);
 % Standard deviations (set so that Var(ΔM) = Var(η))
 sigma_eta = 0.007;
 sigma_eps = 0.00066;
+
+% shock to be simulated in Jorda's beta_h's
+shock_eps = 0.00066;
 
 for s = 1:N_sim
     % Simulate shocks
@@ -42,7 +45,7 @@ for s = 1:N_sim
         % Right-hand side: ε_t
         X = [ones(T,1), eps(1:T)];
         b_lp = pinv(X)*Y_h;
-        IRF_LP(h+1, s) = b_lp(2);  % β_h
+        IRF_LP(h+1, s) = b_lp(2)*shock_eps;  % β_h
     end
 end
 
@@ -53,7 +56,7 @@ median_LP = median(IRF_LP, 2);
 horizon = 21; 
 true_irf = zeros(horizon,1);
 deltaM = zeros(horizon,1);
-eps_irf = zeros(horizon,1); eps_irf(1) = 1; % for Jorda shock has to be 1
+eps_irf = zeros(horizon,1); eps_irf(1) = shock_eps; % for Jorda shock 
 
 for t = 1:horizon
     if t == 1

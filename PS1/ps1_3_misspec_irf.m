@@ -2,8 +2,8 @@ clear all
 
 % Parameters from previous solutions
 a = 0; %0.701502; % 1.43991; 
-b = 0.615; %0.262662; % -1.70648; 
-c = 0.492; %0.885;
+b = 0.49232; %0.262662; % -1.70648; 
+c = 0.6154; %0.885;
 d = 0.115;  % Not used here since eta_t = 0
 rho = 0.8;
 T = 600; % I will burn the first 100
@@ -49,7 +49,7 @@ for s = 1:N_sim
     b1 = pinv(X1)*Y;
     % Impulse response: simulate y_t after ε_0 = 1 standard dev
     y1 = zeros(horizon,1);
-    eps_irf = zeros(horizon,1); eps_irf(1) = 1; % 0.00066;
+    eps_irf = zeros(horizon,1); eps_irf(1) = 0.00066; % 0.00066;
     y1(1) = b1(1) + b1(end)*eps_irf(1); % initial response: alpha + gamma*shock
     for t = 2:horizon
         y1(t) = b1(1) + b1(2) * y1(t-1) + b1(3) * eps_irf(t);
@@ -105,7 +105,7 @@ median_12 = median(IRF_12lag, 2);
 % --- Compute true impulse response ---
 true_irf = zeros(horizon,1);
 deltaM = zeros(horizon,1);
-eps_irf = zeros(horizon,1); eps_irf(1) = 1; %0.00066;
+eps_irf = zeros(horizon,1); eps_irf(1) = 0.00066; %0.00066;
 
 for t = 1:horizon
     if t == 1

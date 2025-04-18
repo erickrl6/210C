@@ -2,8 +2,8 @@ clear all
 
 % Parameters from previous solutions
 a = 0; %0.701502; % 1.43991; 
-b = 0.615; %0.262662; % -1.70648; 
-c = 0.492; %0.885;
+b = 0.49232; %0.262662; % -1.70648; 
+c = 0.6154; %0.885;
 d = 0.115;  % Not used here since eta_t = 0
 rho = 0.8;
 T = 600; % I will burn the first 100
@@ -17,6 +17,9 @@ sigma_eta = 0.007;
 sigma_eps = 0.00066;
 
 H = 20;  % horizon
+
+% shock to be simulated in Jorda's beta_h's
+shock_eps = 0.00066;
 
 % Storage for LP with control (y_{t-1})
 IRF_LP_control = zeros(H+1, N_sim);
@@ -41,7 +44,7 @@ for s = 1:N_sim
         y_lag = y(1:T);                      % y_{t-1}
         X = [ones(T,1), eps_t, y_lag];       % Add constant + controls
         b_lp = pinv(X)*Y_h;
-        IRF_LP_control(h+1, s) = b_lp(2);    % β_h on ε_t
+        IRF_LP_control(h+1, s) = b_lp(2)*shock_eps;    % β_h on ε_t
     end
 end
 
@@ -52,7 +55,7 @@ median_LP_control = median(IRF_LP_control, 2);
 horizon = 21; 
 true_irf = zeros(horizon,1);
 deltaM = zeros(horizon,1);
-eps_irf = zeros(horizon,1); eps_irf(1) = 1; % for Jorda, we use a 1 unit dev
+eps_irf = zeros(horizon,1); eps_irf(1) = shock_eps; % for Jorda shock
 
 for t = 1:horizon
     if t == 1

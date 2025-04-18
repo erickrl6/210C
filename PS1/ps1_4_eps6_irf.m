@@ -2,8 +2,8 @@ clear all
 
 % Parameters from previous solutions
 a = 0; %0.701502; % 1.43991; 
-b = 0.615; %0.262662; % -1.70648; 
-c = 0.492; %0.885;
+b = 0.49232; %0.262662; % -1.70648; 
+c = 0.6154; %0.885;
 d = 0.115;  % Not used here since eta_t = 0
 rho = 0.8;
 T = 600; % I will burn the first 100
@@ -58,7 +58,7 @@ for s = 1:N_sim
 
     % Compute impulse response
     y_irf = zeros(horizon, 1);
-    eps_irf = zeros(horizon, 1); eps_irf(1) = 1;%0.00066;
+    eps_irf = zeros(horizon, 1); eps_irf(1) = 0.00066;
     %deltaM_irf = zeros(horizon,1); deltaM_irf(1) = eps_irf(1); % initial shock just contemporary
     y_irf(1) = b_est(1) + b_est(3)*eps_irf(1); % initial response: alpha + gamma*shock
 
@@ -81,7 +81,7 @@ median_dM6 = median(IRF_eps6, 2);
 % --- Compute true impulse response ---
 true_irf = zeros(horizon,1);
 deltaM = zeros(horizon,1);
-eps_irf = zeros(horizon,1); eps_irf(1) = 1;%0.00066;
+eps_irf = zeros(horizon,1); eps_irf(1) = 0.00066;
 
 for t = 1:horizon
     if t == 1

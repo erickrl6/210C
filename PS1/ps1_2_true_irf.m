@@ -7,8 +7,8 @@ rho = 0.8;
 
 % Coefficients from numerical solution (approximated)
 a = 0; %0.701502; % 1.43991; 
-b = 0.615; %0.262662; % -1.70648; 
-c = 0.492; %0.885;
+b = 0.49232; %0.262662; % -1.70648; 
+c = 0.6154; %0.885;
 d = 0.115;  % Not used here since eta_t = 0
 
 % Simulation settings
@@ -19,8 +19,8 @@ eps = zeros(T, 1);          % Monetary shocks
 eta = zeros(T, 1);          % Productivity shocks
 
 % Apply one-unit shock at t = 0 -- or 1 standard deviation for eps
-eps(1) = 1;
-%eps(1) = 0.00066;
+%eps(1) = 1;
+eps(1) = 0.00066;
 
 % Simulate model
 for t = 1:T
@@ -36,7 +36,7 @@ end
 % Plot impulse response
 figure;
 plot(0:T-1, y, 'o-', 'LineWidth', 2);
-title('True Impulse Response of Output to a 1-Monetary Shock','FontSize',9);
+title('True Impulse Response of Output to a σ-Monetary Shock','FontSize',9);
 xlabel('Time after shock (t)');
 ylabel('Output (y_t)');
 grid on;
